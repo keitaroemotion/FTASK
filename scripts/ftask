@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+FTASK_HOMEDIR=$HOME/.ftask
+cd $FTASK_HOMEDIR
+./FSharpTodo

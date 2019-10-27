@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
 set -e
-dotnet build 
-dotnet run
+
+#
+# App Name: ftask
+# XXX Right now only support the Mac OSX 
+#
+dotnet publish -c Release --runtime osx-x64
+
+#
+# Basic installation on bin + dependencies et cetra ...
+#
+FTASK_HOMEDIR=$HOME/.ftask
+mkdir -p $FTASK_HOMEDIR
+cp -r ./bin/Release/netcoreapp2.2/osx-x64/ $FTASK_HOMEDIR
+cp scripts/ftask /usr/local/bin
+ftask
