@@ -1,7 +1,4 @@
-﻿// Learn more about F# at http://fsharp.org
-
-open System
-open FSharp.Data.Sql
+﻿open System
 
 [<EntryPoint>]
 let main argv =
@@ -13,6 +10,5 @@ let main argv =
     //   list (tasks)         
     //   add duedate to task 
     //   modify duedate in task 
-
     printfn "Hello World from F#!"
     0 // return an integer exit code
