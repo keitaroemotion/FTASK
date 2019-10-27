@@ -14,15 +14,6 @@ type Task = {
     State:   string; 
 }
 
-let tasks = [
-    { 
-        Title   = "Go to hospital";
-        DueDate = new DateTime(2017, 07, 28, 10, 44, 33);
-        Content = "It is very important";
-        State   = "DONE"
-    }
-]
-
 let CreateDatabase() =  
     if not (File.Exists(databaseFilename))
     then
@@ -32,6 +23,35 @@ let GetConnection() =
     let connection = new SQLiteConnection(connectionString)
     connection.Open()
     connection
+
+let AddTodo(
+        connection: SQLiteConnection,
+        title:      string,
+        dueDate:    DateTime,
+        content:    string,
+        state:      string
+    ) = 
+    let sql = 
+        """
+           insert into Task(
+                           Title,
+                           DueDate,
+                           Content,
+                           State 
+                       )
+                       values(
+                           @title, 
+                           @dueDate, 
+                           @content,
+                           @state
+                       )
+        """ 
+    use query = new SQLiteCommand(sql, connection)
+    query.Parameters.AddWithValue("@title",   title)   |> ignore 
+    query.Parameters.AddWithValue("@dueDate", dueDate) |> ignore 
+    query.Parameters.AddWithValue("@content", content) |> ignore 
+    query.Parameters.AddWithValue("@state",   state)   |> ignore 
+    query.ExecuteNonQuery()
 
 let CreateTableTask(connection: SQLiteConnection) = 
     let query = new SQLiteCommand( 
