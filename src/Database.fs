@@ -1,7 +1,11 @@
 module Database
 
 open System
+open System.IO
 open System.Data.SQLite
+
+let databaseFilename = "/usr/local/etc/ftask/todo.sqlite"
+let connectionString = sprintf "Data Source=%s;Version=3;" databaseFilename 
 
 type Task = { 
     Title:   string; 
@@ -19,23 +23,27 @@ let tasks = [
     }
 ]
 
-let databaseFilename = "todo.sqlite"
-let connectionString = sprintf "Data Source=%s;Version=3;" databaseFilename  
-SQLiteConnection.CreateFile(databaseFilename)
+let CreateDatabase() =  
+    if not (File.Exists(databaseFilename))
+    then
+        SQLiteConnection.CreateFile(databaseFilename)
 
-let connection = new SQLiteConnection(connectionString)
-connection.Open()
+let GetConnection() = 
+    let connection = new SQLiteConnection(connectionString)
+    connection.Open()
+    connection
 
-let structureSql =
-    """
-    create table Task
-    (
-        Title     varchar(20),
-        DueDate   datetime, 
-        Content   varchar(20),
-        State     varchar(10),
-    )
-    """
-
-let structureCommand = new SQLiteCommand(structureSql, connection)
-structureCommand.ExecuteNonQuery() |> ignore
+let CreateTableTask(connection: SQLiteConnection) = 
+    let query = new SQLiteCommand( 
+                    """
+                    create table Task
+                    (
+                        Title     varchar(20),
+                        DueDate   datetime, 
+                        Content   varchar(20),
+                        State     varchar(10),
+                    )
+                    """,
+                    connection
+                )
+    query.ExecuteNonQuery() |> ignore

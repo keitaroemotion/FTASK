@@ -10,5 +10,6 @@ let main argv =
     //   list (tasks)         
     //   add duedate to task 
     //   modify duedate in task 
+    let connection = Database.GetConnection()
     printfn "Hello World from F#!"
     0 // return an integer exit code

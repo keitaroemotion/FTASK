@@ -13,6 +13,7 @@ dotnet publish -c Release --runtime osx-x64
 #
 FTASK_HOMEDIR=$HOME/.ftask
 mkdir -p $FTASK_HOMEDIR
+mkdir -p /usr/local/etc/ftask
 cp -r ./bin/Release/netcoreapp2.2/osx-x64/ $FTASK_HOMEDIR
 cp scripts/ftask /usr/local/bin
 ftask
