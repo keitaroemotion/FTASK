@@ -24,7 +24,7 @@ let GetConnection() =
     connection.Open()
     connection
 
-let AddTodo(
+let AddToDo(
         connection: SQLiteConnection,
         title:      string,
         dueDate:    DateTime,
