@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Sqlite analysis tool
+
+db_location="/usr/local/etc/ftask/todo.sqlite"
+
+sqlite3 $db_location "select * from task"
