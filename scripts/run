@@ -3,6 +3,12 @@
 set -e
 
 #
+# initialize DB
+#
+
+rm /usr/local/etc/ftask/*sqlite
+
+#
 # App Name: ftask
 # XXX Right now only support the Mac OSX 
 #
