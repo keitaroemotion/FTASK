@@ -36,12 +36,12 @@ let GetConnection() =
 let CreateTableTask(connection: SQLiteConnection) = 
     let query = new SQLiteCommand( 
                     """
-                    create table Task
+                    create table if not exists Task
                     (
                         Title     varchar(20),
                         DueDate   datetime, 
                         Content   varchar(20),
-                        State     varchar(10),
+                        State     varchar(10)
                     )
                     """,
                     connection
