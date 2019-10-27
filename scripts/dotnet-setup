@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dotnet add package FSharp.Data.SqlClient --version 2.0.5
