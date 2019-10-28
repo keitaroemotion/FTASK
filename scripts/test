@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dotnet test FSharpTodo.fsproj # need some postfix?
