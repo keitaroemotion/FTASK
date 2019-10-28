@@ -1,8 +1,8 @@
 module Database
 
 open System
-open System.IO
 open System.Data.SQLite
+open System.IO
 
 let databaseFilename = "/usr/local/etc/ftask/todo.sqlite"
 let connectionString = sprintf "Data Source=%s;Version=3;" databaseFilename 
